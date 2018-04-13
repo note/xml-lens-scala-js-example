@@ -1,34 +1,48 @@
+import org.scalajs.dom.document
+import pl.msitko.xml.dsl._
+import pl.msitko.xml.parsing.XmlParser
+import pl.msitko.xml.printing.XmlPrinter
+
 import scala.scalajs.js.JSApp
 
-import org.scalajs.dom
-import dom.{ document, window }
 
-import net.michalsitko.xml.parsing.XmlParser
-
+/** To run:
+  * fastOptJS::webpack
+  * then open `target/scala-2.12/classes/index-dev.html`
+  */
 object MainApp extends JSApp {
 
   def main(): Unit = {
-    println("Starting 'my-scala-js'...")
+    println("Starting scala.js app ...")
 
-    val p = document.createElement("p")
-    val text = document.createTextNode("Hello!")
-    p.appendChild(text)
-    document.body.appendChild(p)
+    // some XML input
+    val input =
+      """<?xml version="1.0" encoding="UTF-8"?>
+        |<a>
+        |  <e>item</e>
+        |  <f>item</f>
+        |  <g>item</g>
+        |</a>""".stripMargin
 
+    // turn `f` node to upper case - define transformation
+    val modify = (root \ "f").hasTextOnly.modify(_.toUpperCase)
 
-    val input = "<a></a>"
-    val res = XmlParser.parse(input)
-    println("bazinga here: " + res)
+    // parse XML
+    val parsed = XmlParser.parse(input).right.get
 
-    
-    /*import moment._
+    // apply transformation
+    val res = modify(parsed)
 
-    Moment.locale("en_GB")
+    val resAsString = XmlPrinter.print(res)
 
-    val millis = 1516559497702L
-    Moment().calendar()
-    Moment(millis).calendar()
-    Moment(millis).fromNow()*/
+    val textarea = {
+      val elem = document.createElement("textarea")
+      val text = document.createTextNode(resAsString)
+      elem.appendChild(text)
+      elem
+    }
+    document.body.appendChild(textarea)
+
   }
 
 }

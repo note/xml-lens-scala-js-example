@@ -5,14 +5,14 @@ lazy val root = project
     inThisBuild(List(
       organization := "com.example",
       version      := "0.1-SNAPSHOT",
-      scalaVersion := "2.12.4"
+      scalaVersion := "2.12.6"
     )),
     name := "my-scala-js",
     libraryDependencies ++= Seq(
-      "org.scala-js"  %%% "scalajs-dom"    % "0.9.4",
-      "net.michalsitko"  %%% "xml-lens-io"    % "0.1.0-SNAPSHOT",
-      "ru.pavkin"     %%% "scala-js-momentjs" % "0.9.2-SNAPSHOT",
-      "org.scalatest" %%% "scalatest"      % "3.0.4"                  % "test"
+      "org.scala-js"  %%% "scalajs-dom"        % "0.9.4",
+      "pl.msitko"     %%% "xml-lens-io"        % "0.2.0-RC4",
+      "pl.msitko"     %%% "xml-lens-optics"    % "0.2.0-RC4",
+      "org.scalatest" %%% "scalatest"          % "3.0.4"      % "test"
     ),
     //npmDependencies in Compile += "sax" -> "1.2.4",
     scalaJSUseMainModuleInitializer := true
