@@ -10,14 +10,11 @@ lazy val root = project
     name := "my-scala-js",
     libraryDependencies ++= Seq(
       "org.scala-js"  %%% "scalajs-dom"        % "0.9.4",
-      "pl.msitko"     %%% "xml-lens-io"        % "0.2.0-RC4",
-      "pl.msitko"     %%% "xml-lens-optics"    % "0.2.0-RC4",
-      "org.scalatest" %%% "scalatest"          % "3.0.4"      % "test"
+      "pl.msitko"     %%% "xml-lens-io"        % "0.1.0-RC6",
+      "pl.msitko"     %%% "xml-lens-optics"    % "0.1.0-RC6",
     ),
-    //npmDependencies in Compile += "sax" -> "1.2.4",
     scalaJSUseMainModuleInitializer := true
   )
-
 
 // Automatically generate index-dev.html which uses *-fastopt.js
 resourceGenerators in Compile += Def.task {
